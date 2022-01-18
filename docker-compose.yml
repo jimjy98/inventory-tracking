@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-jimmy}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      PGDATA: /data/postgres
+    volumes:
+       - ./inventory-backend/pgdata:/data/postgres
+       - ./inventory-backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    expose: 
+      - 5432
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+  backend:
+    container_name: nestjs_api_dev
+    environment:
+      - DB_SERVER=postgres
+    build:
+      context: ./inventory-backend
+      target: development
+      dockerfile: ./Dockerfile
+    command: npm run start:dev
+    links:
+      - postgres
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+    depends_on:
+      - "postgres"
+  frontend:
+    container_name: frontend
+    build:
+      context: ./inventory-frontend
+      target: development
+      dockerfile: ./Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - 3000:3000
+    command: npm start
+    restart: unless-stopped
