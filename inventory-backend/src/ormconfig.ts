@@ -3,7 +3,7 @@ import { ConnectionOptions } from 'typeorm'
 import { Item } from './items/item.entity';
 
 const config = {
-    host: 'host.docker.internal',
+    host: 'localhost',
     user: 'jimmy',
     password: 'password',
     database: 'db_inventory-main',
