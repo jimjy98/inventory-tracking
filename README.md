@@ -13,3 +13,6 @@ In order to run the app, you can clone it (or download it), and then run the fol
 ## Prerequisites
 
 Before running the app, you only need to have Docker installed.
+
+## How to run project
+After running `docker-compose up` (takes around a minute), you can access the project frontend on the following port [localhost:3000](http://localhost:3000)
