@@ -1,9 +1,9 @@
-import { join } from 'path'
-import { ConnectionOptions } from 'typeorm'
+import { join } from 'path';
+import { ConnectionOptions } from 'typeorm';
 import { Item } from './items/item.entity';
 
 const config = {
-    host: 'localhost',
+    host: 'host.docker.internal',
     user: 'jimmy',
     password: 'password',
     database: 'db_inventory-main',
